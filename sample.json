@@ -1,0 +1,26 @@
+{
+	"port": 80,
+	"host": "0.0.0.0",
+	"timeout": 10,
+	"log": {
+		"path": "/var/log/go-vhostd.log",
+			"level": "DEBUG",
+			"verbose": true,
+			"rotate": true,
+			"rotation": {
+				"size": 100000000,
+				"compress": 1,
+				"max_files_keep": 10
+		}		
+	},
+	"vhosts": [
+		{
+			"vhost": "example.com",
+			"host": "127.0.0.1:5000"
+		},
+		{
+			"vhost": "otherexample",
+			"host": "127.0.0.1:8000"
+		}
+	]
+}
