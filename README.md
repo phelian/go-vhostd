@@ -3,7 +3,7 @@
 Simple virtual host HTTP request solver.
 
 Edit Configuration
-
+```
 "vhosts": [
 	{
 		"vhost": "example.com",
@@ -14,5 +14,5 @@ Edit Configuration
 		"host": "127.0.0.1:8000"
 	}
 ]
-
+```
 To start proxying http requests from <vhost> to <host>
