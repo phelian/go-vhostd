@@ -1,2 +1,3 @@
 config.json
 go-vhostd
+build.sh
