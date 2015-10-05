@@ -27,6 +27,11 @@ type config struct {
 }
 
 func main() {
+	if len(os.Args) != 2 {
+		usage()
+		os.Exit(1)
+	}
+
 	cfg, err := readConfig(os.Args[1])
 	if err != nil {
 		log.Println(err.Error())
@@ -39,6 +44,10 @@ func main() {
 	}
 
 	run(cfg, logger)
+}
+
+func usage() {
+	fmt.Println("Usage go-vhostd <config>")
 }
 
 func readConfig(path string) (*config, error) {
@@ -66,7 +75,7 @@ func run(cfg *config, logger *log.Handle) {
 			panic(err)
 		}
 		proxy := httputil.NewSingleHostReverseProxy(urlString)
-		log.Printf("Setting up redirection for %s to %s\n", vhost.Host, vhost.Vhost)
+		log.Printf("Setting up redirection for %s to %s\n", vhost.Vhost, vhost.Host)
 		mux.HandleFunc(vhost.Vhost+"/", proxyHandler(proxy))
 	}
 
