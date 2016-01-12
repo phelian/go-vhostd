@@ -8,6 +8,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/phelian/log"
@@ -62,6 +63,7 @@ func readConfig(path string) (*config, error) {
 
 func proxyHandler(p *httputil.ReverseProxy) func(http.ResponseWriter, *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		r.Header.Add("Proxy-RemoteIP", strings.Split(r.RemoteAddr, ":")[0])
 		p.ServeHTTP(w, r)
 	}
 }
